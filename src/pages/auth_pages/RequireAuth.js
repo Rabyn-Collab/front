@@ -4,10 +4,10 @@ import { Navigate, Outlet, useLocation } from 'react-router';
 
 const RequireAuth = () => {
   const location = useLocation();
-  const user = useSelector((store) => store.user);
-  console.log(user);
+  const { user } = useSelector((store) => store.user);
+
   return (
-    user !== null ? <Outlet /> : <Navigate to="/user/login" state={{ from: location }} replace />
+    user === null ? <Navigate to="/user/login" replace /> : <Outlet />
   )
 }
 

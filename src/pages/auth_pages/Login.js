@@ -37,7 +37,7 @@ const Login = () => {
         toast.success('successfully login');
         nav(-1);
       } catch (err) {
-
+        console.log(err);
         toast.error(err.data.message);
 
       }

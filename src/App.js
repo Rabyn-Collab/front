@@ -1,7 +1,7 @@
 import React from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Route, Routes } from 'react-router';
+import { Navigate, Route, Routes } from 'react-router';
 import Home from './pages/Home';
 import Headers from './components/Headers';
 import Login from './pages/auth_pages/Login';
@@ -12,10 +12,13 @@ import Update from './pages/crud/Update';
 import DetailPage from './pages/DetailPage';
 import NotFound from './pages/NotFound';
 import RequireAuth from './pages/auth_pages/RequireAuth';
+import { useSelector } from 'react-redux';
+
 
 
 const App = () => {
 
+  const { user } = useSelector((store) => store.user)
 
   return (
     <>
@@ -26,12 +29,12 @@ const App = () => {
         <Route path='/' element={<Home />} />
 
         <Route element={<RequireAuth />}>
-          <Route path='/create/post' element={<Create />} />
+          <Route path='create/post' element={<Create />} />
           <Route path='update/post' element={<Update />} />
           <Route path='user/profile' element={<Profile />} />
         </Route>
 
-        <Route path='/user/login' element={<Login />} />
+        <Route path='/user/login' element={user === null ? <Login /> : <Navigate to='/' replace />} />
         <Route path='/postDetail' element={<DetailPage />} />
         <Route path='/user/signUp' element={<SignUp />} />
 

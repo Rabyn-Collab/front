@@ -12,10 +12,11 @@ const Home = () => {
     </div>
   }
 
+  console.log(error);
 
 
   return (
-    <div className='grid grid-cols-3 p-5 gap-5'>
+    <div className='grid grid-cols-3  p-5 gap-5'>
       {data && data.map((post) => {
         return <div className='hover: cursor-pointer' onClick={() => nav('postDetail', { state: post })} key={post._id}>
           <img className='h-[250px] w-full' src={post.image} alt="" />
